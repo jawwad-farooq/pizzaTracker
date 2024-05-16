@@ -28,6 +28,9 @@ class PizzaController extends Controller
     }
 
     public function update(Pizza $pizza, Request $request):void {
-        //
+        // dd("rafy");
+        $pizza->update([
+            'status' => $request->status,
+        ]);
     }
 }

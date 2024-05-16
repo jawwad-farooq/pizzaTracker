@@ -4,29 +4,54 @@ import InputLabel from "@/Components/InputLabel";
 import Dropdown from "@/Components/Dropdown";
 import PrimaryButton from "@/Components/PrimaryButton";
 import Select from "@/Components/Select";
-
-
+import { useForm } from "@inertiajs/react";
+import { Transition } from "@headlessui/react";
+import axios from "axios";
+import { route } from 'ziggy-js';
 
 export default function UpdateOrderForm({ pizza, className =''}){
+    
+    const {data, setData, errors, processing, recentlySuccessful} = useForm({
+        size: pizza.size,
+        crust: pizza.crust,
+        status: pizza.status
+    });
+
+    const submit = (e) => {
+        console.log("submit called  !!",pizza.id);
+        e.preventDefault();
+
+        axios.patch(route('pizzas.update', pizza), { status:pizza.id}).then((res) => {
+            console.log("res", res);
+         }).catch((error) => {
+            console.log("error", error);
+         });
+    };
+
     const statusOption = [
-        {'label':'Ordered', 'value':'Ordered'},
-        {'label':'Prepping', 'value':'Prepping'},
-        {'label':'Baking', 'value':'Baking'},
-        {'label':'Checking', 'value':'Checking'},
-        {'label':'Ready', 'value':'Ready'}
+        'Ordered',
+        'Prepping',
+        'Baking',
+        'Checking',
+        'Ready'
+        // {'label':'Ordered', 'value':'Ordered'},
+        // {'label':'Prepping', 'value':'Prepping'},
+        // {'label':'Baking', 'value':'Baking'},
+        // {'label':'Checking', 'value':'Checking'},
+        // {'label':'Ready', 'value':'Ready'}
     ];
     return (
-        <section className>
+        <section className="">
             <header>
                 <h2>Order Information</h2>
             </header>
             <div>
-                <form className="mt-6 space-y-6" >
+                <form onSubmit={submit} className="mt-6 space-y-6" >
                     <InputLabel value="size" />
                     <TextInput
                         id="size"
                         className="mt-1 block w-full"
-                        value={pizza.size}
+                        value={data.size}
                         disabled
                     />
 
@@ -34,21 +59,34 @@ export default function UpdateOrderForm({ pizza, className =''}){
                     <TextInput
                         id="crust"
                         className="mt-1 block w-full"
-                        value={pizza.crust}
+                        value={data.crust}
                         disabled
                     />
 
                     <InputLabel value="status" />
                     <Select 
                         options={statusOption}
-                        value={pizza.status}/>
+                        value={data.status}
+                        onChange={(e) => setData('status', e.target.value)}
+                        // onChange={(e) => console.log(e.target.value)}
+                    />
 
-                    <InputError className="mt-2" message={"something went wrong"}/>
+                    <InputError className="mt-2" />
 
+                    <div className="flex items-center gap-4">
+                        <PrimaryButton disabled={processing}>Save Changes</PrimaryButton>
+
+                        <Transition
+                            show={recentlySuccessful}
+                            enter="transition ease-in-out"
+                            enterFrom="opacity-0"
+                            leave="transition ease-in-out"
+                            leaveTo="opacity-0"
+                        >
+                            <p className="text-sm text-gray-600">Saved.</p>
+                        </Transition>
+                    </div>
                 </form>
-            </div>
-            <div>
-                <PrimaryButton>Save Changes</PrimaryButton>
             </div>
             
         </section>

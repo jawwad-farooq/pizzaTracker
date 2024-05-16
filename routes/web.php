@@ -24,7 +24,6 @@ Route::middleware('auth')->group(function () {
     Route::get('/pizzas/{pizza}', [PizzaController::class, 'edit'])->name('pizzas.edit');
     Route::patch('/pizzas/{pizza}', [PizzaController::class, 'update'])->name('pizzas.update');
 
-
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
