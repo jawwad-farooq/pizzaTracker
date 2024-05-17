@@ -29,12 +29,7 @@ export default function UpdateOrderForm({ pizza, className =''}){
             console.log("error", error);
          });
     };
-    const updatePizza = () => {
-        // Replace with your actual logic to update the pizza
-        // For example, send a socket message to the server
-        // with the updated pizza data
-        socket.send(JSON.stringify({ action: 'updatePizza', pizza }));
-    };
+    
 
     const statusOption = [
         {'label':'Ordered', 'value':'Ordered'},
@@ -71,13 +66,12 @@ export default function UpdateOrderForm({ pizza, className =''}){
                         options={statusOption}
                         value={data.status}
                         onChange={(e) => setData('status', e.target.value)}
-                        // onChange={(e) => console.log(e.target.value)}
                     />
 
                     <InputError className="mt-2" />
 
                     <div className="flex items-center gap-4">
-                        <PrimaryButton disabled={processing} onClick={updatePizza}>Save Changes</PrimaryButton>
+                        <PrimaryButton disabled={processing}>Save Changes</PrimaryButton>
 
                         <Transition
                             show={recentlySuccessful}
