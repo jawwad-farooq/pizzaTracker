@@ -10,8 +10,8 @@ function Select({ options, value, onChange }) {
             >
                 <option value="" selected disabled>Select an option</option>
                 {options.map((option) => (
-                    <option value={option}>
-                        {option}
+                    <option key={option.value} value={option.value}>
+                        {option.label}
                     </option>
                 ))}
             </select>

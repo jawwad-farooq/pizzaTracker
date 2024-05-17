@@ -18,27 +18,30 @@ export default function UpdateOrderForm({ pizza, className =''}){
     });
 
     const submit = (e) => {
-        console.log("submit called  !!",pizza.id);
+        console.log("submit called  !!", data.status);
         e.preventDefault();
 
-        axios.patch(route('pizzas.update', pizza), { status:pizza.id}).then((res) => {
+        axios.patch(route('pizzas.update', pizza), { 
+            status:data.status 
+        }).then((res) => {
             console.log("res", res);
          }).catch((error) => {
             console.log("error", error);
          });
     };
+    const updatePizza = () => {
+        // Replace with your actual logic to update the pizza
+        // For example, send a socket message to the server
+        // with the updated pizza data
+        socket.send(JSON.stringify({ action: 'updatePizza', pizza }));
+    };
 
     const statusOption = [
-        'Ordered',
-        'Prepping',
-        'Baking',
-        'Checking',
-        'Ready'
-        // {'label':'Ordered', 'value':'Ordered'},
-        // {'label':'Prepping', 'value':'Prepping'},
-        // {'label':'Baking', 'value':'Baking'},
-        // {'label':'Checking', 'value':'Checking'},
-        // {'label':'Ready', 'value':'Ready'}
+        {'label':'Ordered', 'value':'Ordered'},
+        {'label':'Prepping', 'value':'Prepping'},
+        {'label':'Baking', 'value':'Baking'},
+        {'label':'Checking', 'value':'Checking'},
+        {'label':'Ready', 'value':'Ready'}
     ];
     return (
         <section className="">
@@ -74,7 +77,7 @@ export default function UpdateOrderForm({ pizza, className =''}){
                     <InputError className="mt-2" />
 
                     <div className="flex items-center gap-4">
-                        <PrimaryButton disabled={processing}>Save Changes</PrimaryButton>
+                        <PrimaryButton disabled={processing} onClick={updatePizza}>Save Changes</PrimaryButton>
 
                         <Transition
                             show={recentlySuccessful}
