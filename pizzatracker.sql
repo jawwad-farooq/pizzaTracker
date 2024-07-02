@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 14, 2024 at 04:07 PM
+-- Generation Time: Jul 02, 2024 at 01:37 PM
 -- Server version: 10.4.28-MariaDB
--- PHP Version: 8.2.4
+-- PHP Version: 7.4.1
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -151,7 +151,7 @@ CREATE TABLE `pizzas` (
 --
 
 INSERT INTO `pizzas` (`id`, `user_id`, `size`, `crust`, `status`, `created_at`, `updated_at`) VALUES
-(32, 4, 'medium', 'garlic', 'ordered', '2024-04-29 01:40:25', '2024-04-29 01:40:25'),
+(32, 4, 'medium', 'garlic', 'Baking', '2024-04-29 01:40:25', '2024-05-17 08:26:03'),
 (109, 3, 'medium', 'noraml', 'ready', '2024-04-29 01:40:25', '2024-04-29 01:40:25'),
 (152, 7, 'large', 'noraml', 'ordered', '2024-04-29 01:40:25', '2024-04-29 01:40:25'),
 (195, 2, 'large', 'thin', 'ready', '2024-04-29 01:40:25', '2024-04-29 01:40:25'),
@@ -160,7 +160,7 @@ INSERT INTO `pizzas` (`id`, `user_id`, `size`, `crust`, `status`, `created_at`, 
 (511, 3, 'small', 'thin', 'baking', '2024-04-29 01:40:25', '2024-04-29 01:40:25'),
 (573, 5, 'small', 'thin', 'baking', '2024-04-29 01:40:25', '2024-04-29 01:40:25'),
 (576, 2, 'small', 'thin', 'baking', '2024-04-29 01:40:25', '2024-04-29 01:40:25'),
-(585, 1, 'small', 'thin', 'ready', '2024-04-29 01:40:25', '2024-04-29 01:40:25');
+(585, 1, 'small', 'thin', 'Checking', '2024-04-29 01:40:25', '2024-05-29 09:06:49');
 
 -- --------------------------------------------------------
 
@@ -182,10 +182,7 @@ CREATE TABLE `sessions` (
 --
 
 INSERT INTO `sessions` (`id`, `user_id`, `ip_address`, `user_agent`, `payload`, `last_activity`) VALUES
-('FExdPlImMqUMYNTsk4mY4g3SzAHFMQCnROB64prx', 81, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36', 'YTo1OntzOjY6Il90b2tlbiI7czo0MDoiMUFXRmdWRW9nNXlyMkIwNFdSNVdhVVJNbkNzYVBiaEdoQ1FBQVRuQSI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6MzE6Imh0dHA6Ly9sb2NhbGhvc3Q6ODAwMC9waXp6YXMvMzIiO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX1zOjM6InVybCI7YTowOnt9czo1MDoibG9naW5fd2ViXzU5YmEzNmFkZGMyYjJmOTQwMTU4MGYwMTRjN2Y1OGVhNGUzMDk4OWQiO2k6ODE7fQ==', 1714568279),
-('jedBNADwcylTxOjLn5QHZU58cVSCehHjauXwEqtH', 81, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36', 'YTo1OntzOjY6Il90b2tlbiI7czo0MDoiQlBndlhSZTRZNFJUNUk0VTdrb2hSOTdZUlRBRlZFUkUxUFJ3OUh5QyI7czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6MzE6Imh0dHA6Ly9sb2NhbGhvc3Q6ODAwMC9waXp6YXMvMzIiO31zOjM6InVybCI7YTowOnt9czo1MDoibG9naW5fd2ViXzU5YmEzNmFkZGMyYjJmOTQwMTU4MGYwMTRjN2Y1OGVhNGUzMDk4OWQiO2k6ODE7fQ==', 1715694905),
-('rxHbwL12pq3zPHcnJ1iDA40OdZB8wfY8xODvlQ3O', NULL, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36', 'YTo0OntzOjY6Il90b2tlbiI7czo0MDoiZFpyVzBKU0ZnZEt0ZE1TMmV5Z09DT1JOS29GTldVZEZ1SUFscDZUMSI7czozOiJ1cmwiO2E6MTp7czo4OiJpbnRlbmRlZCI7czozMToiaHR0cDovL2xvY2FsaG9zdDo4MDAwL3Bpenphcy8zMiI7fXM6OToiX3ByZXZpb3VzIjthOjE6e3M6MzoidXJsIjtzOjMxOiJodHRwOi8vbG9jYWxob3N0OjgwMDAvcGl6emFzLzMyIjt9czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319fQ==', 1714479920),
-('XUYqxkNDN6iRzuho62dZZvBYQuXkym7skr3bHI9X', 81, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36', 'YTo1OntzOjY6Il90b2tlbiI7czo0MDoiRUJZd0dENGNBTW5WU2xheDdORTFmTk5MdEFuSnJoZk9lNUJoemlHeiI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6MzE6Imh0dHA6Ly9sb2NhbGhvc3Q6ODAwMC9waXp6YXMvMzIiO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX1zOjM6InVybCI7YTowOnt9czo1MDoibG9naW5fd2ViXzU5YmEzNmFkZGMyYjJmOTQwMTU4MGYwMTRjN2Y1OGVhNGUzMDk4OWQiO2k6ODE7fQ==', 1714464088);
+('3MmXJ5fe8gqv5uz3Elmq5wdKBhazUCN4WpNwyR8V', NULL, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoia0NLb0k4VE42bGpsdlV4WEh1bmREV0pmY3U2QkpoaWRjMmdOVDFtZCI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6MzA6Imh0dHA6Ly9sb2NhbGhvc3Q6ODAwMC9vcmRlci8zMiI7fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fX0=', 1718869101);
 
 -- --------------------------------------------------------
 

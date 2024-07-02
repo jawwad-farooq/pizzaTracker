@@ -9,10 +9,17 @@ use Inertia\Response;
 
 class PublicPizzaController extends Controller
 {
-    public function show(Pizza $pizza):Response {
-        // dd("shoe function is working");
-        return Inertia::render('Pizzas/Show', [
-            'pizza' => $pizza,
-        ]);
+    public function show($id) {
+        $pizza = Pizza::find($id);
+        if($pizza){
+            return Inertia::render('Pizzas/Show', [
+                'pizza' => $pizza,
+            ]);
+        }
+        else {
+            return Inertia::render('Pizzas/Show', [
+                'error' => "Order Not Found",
+            ]);
+        }
     }
 }

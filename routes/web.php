@@ -3,17 +3,29 @@
 use App\Http\Controllers\PizzaController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\PublicPizzaController;
+use App\Http\Controllers\OneDriveController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
-Route::get('/', function () {
+Route::get('/admin', function () {
     return Inertia::render('Welcome', [
         'canLogin' => Route::has('login'),
         'canRegister' => Route::has('register'),
         'laravelVersion' => Application::VERSION,
         'phpVersion' => PHP_VERSION,
     ]);
+});
+
+Route::get('/', function () {
+    return Inertia::render('Home');
+});
+
+Route::controller(OneDriveController::class)->group(function(){
+    Route::get('/onelogin', 'login')->name('login');
+    Route::get('/callback', 'callback')->name('callback');
+    Route::get('/files', 'listFiles')->name('files');
+    Route::get('/edit/{id}', 'editFile')->name('edit');
 });
 
 Route::get('/order/{pizza}', [PublicPizzaController::class, 'show'])->name('public.pizzas.show');
